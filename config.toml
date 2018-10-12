@@ -1,4 +1,4 @@
-baseURL = "http://tommyblue.it/"
+baseURL = "https://tommyblue.it/"
 languageCode = "en-us"
 title = "TommyBlue.it"
 theme = "arabica"
