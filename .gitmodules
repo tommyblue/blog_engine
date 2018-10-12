@@ -1,0 +1,7 @@
+[submodule "themes/arabica"]
+	path = themes/arabica
+	url = https://github.com/nirocfz/arabica.git
+[submodule "public"]
+	path = public
+	url = git@github.com:tommyblue/tommyblue.github.io.git
+	branch = master

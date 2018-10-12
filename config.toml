@@ -1,0 +1,18 @@
+baseURL = "http://tommyblue.it/"
+languageCode = "en-us"
+title = "TommyBlue.it"
+theme = "arabica"
+enableEmoji = true
+enableRobotsTXT = true
+googleAnalytics = "UA-9338649-1"
+paginate = 10
+pygmentsStyle = "dracula"
+pygmentsCodefences = true
+[permalinks]
+  post = "/:year/:month/:day/:title/"
+[sitemap]
+  changefreq = "monthly"
+  filename = "sitemap.xml"
+  priority = 0.5
+[params]
+  customCSS = ["custom.css"]
