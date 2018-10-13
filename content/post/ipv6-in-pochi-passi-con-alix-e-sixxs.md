@@ -20,7 +20,7 @@ Una volta ottenuti i dati di accesso bisogna richiedere un tunnel. In questa gui
 <h2>AICCU</h2>
 Come premesso il sistema deve avere l'ora corretta con uno scarto massimo di 30 secondi, altrimenti AICCU non stabilisce la connessione. Nel più semplice dei casi per farlo basta installare il pacchetto <strong>ntp</strong>. AICCU logga in <em>/var/log/syslog</em>, ecco il tipico errore per problemi di sincronizzazione:
 
-```prettyprint lang-bash
+```bash
 
 ~# cat /var/log/syslog | grep aiccu
 
@@ -36,7 +36,7 @@ Apr 28 08:50:19 voyage aiccu[1731]: Couldn't retrieve first tunnel for the above
 
 Una volta sincronizzato l'orario si può procedere installando il pacchetto <strong>aiccu</strong><em> </em>. All'installazione vi verranno chiesti i dati di accesso a SixXS. Oltre a questo ho scommentato soltanto due righe in <em>/etc/aiccu.conf</em>, riporto tutto il file:
 
-```prettyprint lang-bash
+```bash
 
 username MY_USERNAME
 password MY_PASSWORD
@@ -58,7 +58,7 @@ Molte informazioni le potete trovare anche nella wiki di SixXS: <a href="http://
 <h2>Interfaccia di rete</h2>
 Quando il tunnel ci verrà  attivato potremo configurare l'interfaccia, nello specifico inserendo questa configurazione in <em>/etc/network/interfaces</em> (utilizzando i dati che abbiamo ottenuto):
 
-```prettyprint lang-bash
+```bash
 
 auto sixxs
 iface sixxs inet6 v4tunnel
@@ -83,7 +83,7 @@ Ora che abbiamo un IPv6 e lo usiamo per navigare da un pc, è giunto il momento 
 Come al solito il primo passo è richiedere a SixXS una subnet. Una volta ottenuta la rete /48, seguendo la <a href="https://www.sixxs.net/wiki/Installing_a_Subnet" target="_blank">guida nella wiki di Sixxs</a>, andiamo a configurare una /64 per la nostra rete.
 Assegniamo staticamente uno di questi indirizzi in <em>/etc/network/interfaces</em>:
 
-```prettyprint lang-bash
+```bash
 
 iface eth0 inet6 static
 address MY_IP_FROM_SUBNET
@@ -95,7 +95,7 @@ netmask 64
 Riavviata la rete, il nostro ALIX avrà  un secondo IPv6 (oltre a quello del tunnel). Per permettere il routing e l'advertising degli indirizzi ip usiamoÂ <strong>radvd</strong>: non si tratta di un DHCPv6 (al momento non esiste un DHCPv6 veramente funzionante) ma di un router IPv6 che periodicamente invia pacchetti multicast di Router Advertisement per permettere l'autoconfigurazione degli apparati di rete utilizzando gli ip della nostra subnet.
 Dopo aver installato il pacchetto <strong>radvd</strong> bisogna creare il file <em>/etc/radvd.conf</em> con il seguente contenuto:
 
-```prettyprint lang-bash
+```bash
 
 interface eth0{
   AdvSendAdvert on;
@@ -112,7 +112,7 @@ interface eth0{
 
 Avviamo radvd e abilitiamo il forwarding:
 
-```prettyprint lang-bash
+```bash
 
 echo "net.ipv6.conf.all.forwarding=1" >> /etc/sysctl.conf
 echo "net.ipv6.conf.default.forwarding=1" >> /etc/sysctl.conf
@@ -130,7 +130,7 @@ Una cosa che ben presto si capisce di IPv6 è che le tanto odiate NAT in certi c
 
 Ho scritto un breve script per <strong>ip6tables</strong> prendendo spunto dalla wiki si SixXS, dopo averlo personalizzato (dovete settare qualche IP) basta metterlo in <em>/etc/init.d</em> e aggiungerlo al runlevel di default (<em>update-rc.d firewall-ipv6 defaults</em>):
 
-```prettyprint lang-bash
+```bash
 
 #! /bin/bash
 

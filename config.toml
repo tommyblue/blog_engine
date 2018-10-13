@@ -16,3 +16,4 @@ pygmentsCodefences = true
   priority = 0.5
 [params]
   customCSS = ["custom.css"]
+  dateFormatToUse = "2006-01-02"

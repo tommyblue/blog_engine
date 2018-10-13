@@ -29,8 +29,8 @@ Troverete la versione aggiornata e completa dei file nel [mio repository GitHub 
 Tutto ciò che concerne Vim è essenzialmente in due posti: il file *~/.vimrc* e la cartella *~/.vim/*. Il file *~/.vimrc* viene eseguito al lancio del programma mentre nella cartella si trovano tutte le estensioni (colori, plugin, ecc.).
 Come prima cosa impostiamo un po' di configurazioni di base in *~/.vimrc*:
 
-	
-```prettyprint lang-vim
+
+```vim
 
 set showcmd     "show incomplete cmds down the bottom
 set showmode    "show current mode down the bottom
@@ -76,7 +76,7 @@ oppure, usando *~/.vimrc*:
 
 Di seguito una configurazione leggermente più complessa riguardante lo schema colori che tiene conto dell'interfaccia di Vim usata:
 
-```prettyprint lang-vim
+```vim
 
 " Color scheme
 if has("gui_running")
@@ -130,7 +130,7 @@ endif
 
 Personalmente non modifico il tasto Leader (di default *\\*), ma se lo volete fare:
 
-```prettyprint lang-vim
+```vim
 
 let mapleader=","
 
@@ -142,9 +142,9 @@ let mapleader=","
 Installare un plugin in Vim vuol dire copiare i suoi file nella cartella *~/.vim/* e in particolare nelle sue varie sottodirectory (*plugin*, *doc*, *autoload*, ecc). Non mi piace molto dover dividere i file di uno stesso plugin ed evidentemente non sono il solo dato che esiste il plugin [Pathogen](http://www.vim.org/scripts/script.php?script_id=2332) che permette di scompattare ogni plugin nella sua cartella in *~/.vim/bundle/*.
 Per installare il plugin bisogna copiare il plugin in *~/.vim/autoload* e creare la cartella *~/.vim/bundle/*:
 
-```prettyprint lang-bash
+```bash
 
-mkdir -p ~/.vim/autoload ~/.vim/bundle 
+mkdir -p ~/.vim/autoload ~/.vim/bundle
 curl 'www.vim.org/scripts/download_script.php?src_id=16224' > ~/.vim/autoload/pathogen.vim
 
 ```
@@ -152,7 +152,7 @@ curl 'www.vim.org/scripts/download_script.php?src_id=16224' > ~/.vim/autoload/pa
 
 Per attivare il plugin basta inserire in *~/.vimrc*:
 
-```prettyprint lang-vim
+```vim
 
 "necessary on some Linux distros for pathogen to properly load bundles
 filetype on
@@ -163,22 +163,22 @@ call pathogen#infect()
 
 ```
 
-	
+
 ## NERDTree
 
 Adesso che abbiamo installato Pathogen cosa di meglio se non provarlo! Uno dei plugin che uso di più è sicuramente [NerdTree](http://www.vim.org/scripts/script.php?script_id=1658), che permette la visualizzazione dell'albero delle directory e dei file. Per installarlo quindi si seguono le [istruzioni del repository GitHub](https://github.com/scrooloose/nerdtree), ovvero:
 
-```prettyprint lang-bash
+```bash
 
 cd ~/.vim/bundle
 git clone https://github.com/scrooloose/nerdtree.git
 
 ```
 
-	
+
 Personalmente utilizzo queste configurazioni in *~/.vimrc* per NerdTree:
 
-```prettyprint lang-vim
+```vim
 
 " Visualizzo NERDTree con i tasti 'wm'
 nmap wm :NERDTree<cr>
@@ -194,7 +194,7 @@ silent! nmap <silent> <Leader>p :NERDTreeToggle<CR>
 
 Come abbiamo appena visto installare i plugin è molto semplice, specialmente con Pathogen, ma a lungo andare si potrebbe perdere un po' traccia di cosa si è installato e, soprattutto, se i plugin installati sono anche aggiornati. Per ovviare al problema uso [Vundle](https://github.com/gmarik/vundle), un plugin che, sfruttando Pathogen, permette di automatizzare le operazioni di installazione e aggiornamento dei plugin. Per installarlo:
 
-```prettyprint lang-bash
+```bash
 
 git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 
@@ -203,7 +203,7 @@ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 
 La configurazione a questo punto è piuttosto semplice:
 
-```prettyprint lang-vim
+```vim
 
 set nocompatible               " be iMproved
 filetype off                   " required!
@@ -212,7 +212,7 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " let Vundle manage Vundle
-" required! 
+" required!
 Bundle 'gmarik/vundle'
 
 " Set plugins here...
@@ -225,7 +225,7 @@ filetype plugin indent on     " required!
 
 Se a questo punto si vuole installare un plugin da GitHub (ad esempio reinstalliamo, dopo averlo eliminato, NerdTree), basta inserire in *~/.vimrc*:
 
-```prettyprint lang-vim
+```vim
 
 Bundle 'scrooloose/nerdtree.git'
 
@@ -258,7 +258,7 @@ Adesso che Vim è configurato per installare velocemente i plugin inizio con una
 
 Inizio con Fugitive, un plugin che trasforma Vim in un client Git. Personalmente, almeno per ora, non uso direttamente le funzionalità  per Git, ma mi è utile per visualizzare lo stato del repository su cui sto lavorando. Dopo aver inserito il bundle:
 
-```prettyprint lang-vim
+```vim
 
 Bundle 'tpope/vim-fugitive'
 
@@ -267,7 +267,7 @@ Bundle 'tpope/vim-fugitive'
 
 per vedere lo stato del repository si inserisce in *~/.vimrc*:
 
-```prettyprint lang-vim
+```vim
 
 set statusline+=%{fugitive#statusline()}
 
@@ -280,7 +280,7 @@ Per una panoramica più completa del plugin esiste una [serie di screencast su F
 
 [Snipmate](https://github.com/msanders/snipmate.vim) è un plugin che permette l'uso degli snippet, ovvero l'uso di una stringa che, seguita dal Tab, genera del codice. Snipmate non va d'accordo con Pathogen quindi non è possibile utilizzare Vundle. Per installarlo bisogna quindi seguire la guida:
 
-```prettyprint lang-bash
+```bash
 
 git clone git://github.com/msanders/snipmate.vim.git
 cd snipmate.vim
@@ -291,7 +291,7 @@ cp -R * ~/.vim
 
 Per fare un esempio, si può aprire un file html, digitare *html* seguito da un Tab e Snipmate genererà :
 
-```prettyprint lang-html
+```html
 
 <html></html>
 
@@ -304,7 +304,7 @@ Se lavorate molto con l'HTML vi consiglio di dare un bello sguardo a [Sparkup](h
 
 seguito da un Tab produce:
 
-```prettyprint lang-html
+```html
 
 <nav>
    <ul>
@@ -334,7 +334,7 @@ Intanto i requisiti: Command-T richiede che sia installato Ruby (e che sia della
 
 Il plugin si può installare con Vundle, quindi in *~/.vimrc*:
 
-```prettyprint lang-vim
+```vim
 
 Bundle 'git://git.wincent.com/command-t.git'
 
@@ -342,7 +342,7 @@ Bundle 'git://git.wincent.com/command-t.git'
 
 
 e, come al solito, si installa con:
-```prettyprint lang-vim
+```vim
 
 :BundleInstall
 
@@ -355,7 +355,7 @@ Fatto questo il plugin va compilato. Se, come me, usate RVM, prima di compilare 
 
 entrate poi nella cartella *~/.vim/bundle/command-t/ruby/command-t/* e lanciate:
 
-```prettyprint lang-bash
+```bash
 
 ruby extconf.rb
 make
@@ -372,7 +372,7 @@ Esiste anche un plugin alternativo che promette faville, specialmente per chi ha
 Eccoci al mio plugin preferito: [Vim-Rails](https://github.com/tpope/vim-rails). Chiunque programmi in Ruby on Rails amerà  *:Rmodel*, *:Rview*, *:Rcontroller* per navigare velocemente l'MVC di una risorsa, *:Rextract* per creare un partial al volo di un codice selezionato, ecc.
 Per installarlo, in *~/.vimrc*:
 
-```prettyprint lang-vim
+```vim
 
 Bundle 'tpope/vim-rails.git'
 

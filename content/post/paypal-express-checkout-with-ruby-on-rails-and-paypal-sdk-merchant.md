@@ -203,7 +203,7 @@ The _Order.set\_payment\_token_ method just saves the token in the order model. 
 
 At the end of the API call you can use the _@paypal\_url_ variable to build the "Pay with Paypal" button. This is the view:
 
-```prettyprint lang-erb
+```erb
 
 <%= link_to @paypal_url do %>
   <img src="https://www.paypalobjects.com/it_IT/IT/Marketing/i/bnr/bnr_horizontal_solutiongraphic_335x80.gif" style="margin-right:7px;" />

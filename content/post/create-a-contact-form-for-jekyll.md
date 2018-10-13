@@ -20,7 +20,7 @@ The first step is to register a free account to [reCAPTCHA](http://www.google.co
 
 To use a rack-based app on Heroku you need a *config.ru* file, this is mine:
 
-```prettyprint lang-ruby
+```ruby
 
 require 'rubygems'
 require 'sinatra'
@@ -35,10 +35,10 @@ run Sinatra::Application
 
 ```
 
-	
+
 Just insert the reCAPTCHA keys and the file is ready. Now the *application.rb* file called by the *require* above:
 
-```prettyprint lang-ruby
+```ruby
 
 set :public, Proc.new { File.join(root, "_site") }
 
@@ -110,7 +110,7 @@ The SendGrid username and password are loaded automatically from your Heroku env
 
 The last step is to create the contact form page, including the reCAPTCHA js:
 
-```prettyprint lang-html
+```html
 
 <script type="text/javascript" src="http://www.google.com/recaptcha/api/js/recaptcha_ajax.js"></script>
 
@@ -122,7 +122,7 @@ The last step is to create the contact form page, including the reCAPTCHA js:
    }
    $(document).ready(function(){
 	showRecaptcha('recaptcha_div');
-	
+
 	$("#form").submit(function(ev){
 	    ev.preventDefault();
 	    if (!$(this).valid()) return;
@@ -149,7 +149,7 @@ The last step is to create the contact form page, including the reCAPTCHA js:
 		      error: function(xhr, ajaxOptions, thrownError){
 			  $('#form').html("<div id='message'></div>");
 			  $('#message').html("<h2>Error sending the message</h2>").hide().fadeIn(1500);
-		      } 
+		      }
 		  });
 		} else {
 		  showRecaptcha('recaptcha_div');
@@ -171,7 +171,7 @@ The last step is to create the contact form page, including the reCAPTCHA js:
 **The code seems a bit tricky :)** but it's simple. It just intercepts the form submission, send a first POST call to */send* and, if the captcha is verified, generates a second POST call to */send_email*, which sends the email.
 The last piece is the form HTML code:
 
-```prettyprint lang-html
+```html
 
 <form id="form" method="post">
 	<label for="name">Name</label>
