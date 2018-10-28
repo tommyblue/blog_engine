@@ -420,7 +420,7 @@ I’m going to leave this as an exercise for the readers.
 
 ## Consume the APIs with React
 
-In the [next part of this guide](https://www.tommyblue.it/2018/03/31/api-authentication-with-phoenix-and-react-part-2/), I’ll show how to use what done here in a frontend app built using React. [Read it here](https://www.tommyblue.it/2018/03/31/api-authentication-with-phoenix-and-react-part-2/).
+In the [next part of this guide](/2018/03/31/api-authentication-with-phoenix-and-react---part-2/), I’ll show how to use what done here in a frontend app built using React. [Read it here](/2018/03/31/api-authentication-with-phoenix-and-react---part-2/).
 
 ## Note: JWT and why I didn’t use it
 

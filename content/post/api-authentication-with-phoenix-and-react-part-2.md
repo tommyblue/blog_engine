@@ -11,7 +11,7 @@ title = "API Authentication with Phoenix and React - part 2"
 
 +++
 
-[In the first part of this post](https://www.tommyblue.it/2018/03/29/api-authentication-with-phoenix-and-react-part-1/) I've shown how to configure the API server to let the user authenticate, return an authentication token, and request it to access protected routes.
+[In the first part of this post](/2018/03/28/api-authentication-with-phoenix-and-react---part1/) I've shown how to configure the API server to let the user authenticate, return an authentication token, and request it to access protected routes.
 Now I'm going to configure a [React](https://reactjs.org/) app to consume that API and manage authentication.
 
 The app uses [React Router](https://reacttraining.com/react-router/) to manage routes and [Redux](https://redux.js.org/) for the state of the app.
