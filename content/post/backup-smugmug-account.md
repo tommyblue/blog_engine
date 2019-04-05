@@ -1,7 +1,7 @@
 ---
 title: "Complete backup of a SmugMug account"
 date: 2019-04-05T23:47:14+02:00
-draft: true
+draft: false
 author: "Tommaso Visconti"
 categories: ["smugmug", "golang"]
 description: ""
