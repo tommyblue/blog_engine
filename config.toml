@@ -17,3 +17,5 @@ pygmentsCodefences = true
 [params]
   customCSS = ["custom.css"]
   dateFormatToUse = "2006-01-02"
+[markup.goldmark.renderer]
+  unsafe= true

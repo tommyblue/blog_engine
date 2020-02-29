@@ -39,7 +39,7 @@ config.logger = SyslogLogger.new('/var/log/<APP_NAME>.log')
 ## Use logrotate
 This is the cleaner way, but requires to create a file in the server, inside the `/etc/logrotate.d/` folder. This is a possible content of the `/etc/logrotate.d/rails_apps` file:
 
-```cron
+```ini
 /path/to/rails/app/log/*.log {
     weekly
     missingok
@@ -54,7 +54,7 @@ This is the cleaner way, but requires to create a file in the server, inside the
 The `copytruncate` option is required unless you want to restart the rails app after log rotation. Otherwise the app will continue to use the old log file, if it exists, or will stop logging (or, worse, will crash) if the file is deleted.
 Below the `copytruncate` details from [the logrotate man page](http://linuxcommand.org/man_pages/logrotate8.html):
 
-```init
+```ini
 copytruncate
       Truncate  the  original log file in place after creating a copy,
       instead of moving the old log file and optionally creating a new

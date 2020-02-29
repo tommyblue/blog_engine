@@ -24,24 +24,25 @@ If you want to try the new REST API check this link [http://paypal.github.io/](h
 
 To use the **paypal-sdk-merchant** gem in a Rails app just add:
 
-`gem 'paypal-sdk-merchant'`
+```sh
+gem 'paypal-sdk-merchant'
+```
 
 in the *Gemfile*, then install with _bundle install_.
 You can generate the _config/paypal.yml_ config file with
 
-`rails g paypal:sdk:install`
+```sh
+rails g paypal:sdk:install
+```
 
 You can find an example in [https://github.com/paypal/merchant-sdk-ruby](https://github.com/paypal/merchant-sdk-ruby) . To obtain the configuration values you must register the app both in the [Paypal sandbox](https://developer.paypal.com/webapps/developer/applications/myapps) (for development use) and in [Paypal Apps](https://apps.paypal.com/).
 
 To integrate the gem with Rails, create a file _config/initializers/paypal.rb_ with the content:
 
 ```ruby
-
 PayPal::SDK.load("config/paypal.yml", Rails.env)
 PayPal::SDK.logger = Rails.logger
-
 ```
-
 
 Now the Rails app is ready to go. But... where?? :)
 
@@ -65,7 +66,6 @@ To clearify these steps you can play with the sample app at [https://paypal-sdk-
 I put the Paypal logic in the _lib/modules/paypal\_interface.rb_ file. Its basic structure is:
 
 ```ruby
-
 require 'paypal-sdk-merchant'
 
 class PaypalInterface
@@ -80,9 +80,7 @@ class PaypalInterface
     @order = order
   end
 end
-
 ```
-
 
 The **@order** variable is an instance of the Order model, which referers to the order going to be paid. I'll use this model later to save the data needed to manage the payment.
 
@@ -91,7 +89,6 @@ The **@order** variable is an instance of the Order model, which referers to the
 As you can see in the code below, the library needs three routes. This is the pertinent code from _config/routes.rb_:
 
 ```ruby
-
 resources :orders do
   collection do
     get :paid
@@ -99,23 +96,18 @@ resources :orders do
     post :ipn
   end
 end
-
 ```
-
 
 I defined the _HOST\_WO\_HTTP_ variable in a custom initializer because it differs depending on the environment, here it is:
 
 ```ruby
-
 if Rails.env.production?
   HOST_WO_HTTP = 'www.agrime.it'
 else
   HOST_WO_HTTP = 'localhost:3000'
 end
 HOST = "http://#{HOST_WO_HTTP}"
-
 ```
-
 
 I'm sure a better (and more railsy) way exists, but I didn't find it. Any suggestion is welcome! :)
 
@@ -126,7 +118,6 @@ Now it's time do make the first step and request the url for the payment. Imagin
 This is the controller action:
 
 ```ruby
-
 def show
   @order = Order.find(params[:id])
   @paypal = PaypalInterface.new(@order)
@@ -137,14 +128,11 @@ def show
     # manage error
   end
 end
-
 ```
-
 
 The main method used here is _express\_checkout_, defined in the _PaypalInterface_ class:
 
 ```ruby
-
 class PaypalInterface
   [..]
   def express_checkout
@@ -195,20 +183,16 @@ class PaypalInterface
     end
   end
 end
-
 ```
-
 
 The _Order.set\_payment\_token_ method just saves the token in the order model. It will be used after the payment, to link the payment with the correct order.
 
 At the end of the API call you can use the _@paypal\_url_ variable to build the "Pay with Paypal" button. This is the view:
 
-```erb
-
+```txt
 <%= link_to @paypal_url do %>
   <img src="https://www.paypalobjects.com/it_IT/IT/Marketing/i/bnr/bnr_horizontal_solutiongraphic_335x80.gif" style="margin-right:7px;" />
 <% end %>
-
 ```
 
 

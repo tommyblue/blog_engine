@@ -1,7 +1,7 @@
 ---
 title: "How to use a launch template in AWS Batch compute environment with custom user_data file"
 date: 2020-02-22T22:31:07+01:00
-draft: true
+draft: false
 author: "Tommaso Visconti"
 categories: ["terraform", "aws"]
 description: ""
